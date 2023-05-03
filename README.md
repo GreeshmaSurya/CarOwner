@@ -73,7 +73,7 @@ Step 3 :
 
 Now, to view the details , open a new script and type in the below code :
 
-import CarOwner from 0x01
+  import CarOwner from 0x01
 
 pub fun main(phno: String): CarOwner.Details {
     return CarOwner.owners[phno]!
