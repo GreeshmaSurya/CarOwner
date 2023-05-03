@@ -16,38 +16,38 @@ Step 1 :
 
 Open a contract and enter the code seen below : 
 
-  pub contract CarOwner {
+    pub contract CarOwner {
 
-    pub var owners: {String: Details}
+      pub var owners: {String: Details}
     
-    pub struct Details {
-        pub let firstName: String
-        pub let lastName: String
-        pub let carbrand: String
-        pub let model: String
-        pub let purchaseyear: String
-        pub let phno: String
+      pub struct Details {
+          pub let firstName: String
+          pub let lastName: String
+          pub let carbrand: String
+          pub let model: String
+          pub let purchaseyear: String
+          pub let phno: String
 
-        init(_firstName: String, _lastName: String, _carbrand: String,_model: String,_purchaseyear : String,_phno : String) {
-            self.firstName = _firstName
-            self.lastName = _lastName
-            self.carbrand = _carbrand
-            self.model = _model
-            self.purchaseyear = _purchaseyear
-            self.phno = _phno
-        }
+          init(_firstName: String, _lastName: String, _carbrand: String,_model: String,_purchaseyear : String,_phno : String) {
+              self.firstName = _firstName
+              self.lastName = _lastName
+              self.carbrand = _carbrand
+              self.model = _model
+              self.purchaseyear = _purchaseyear
+              self.phno = _phno
+          }
+      }
+
+      pub fun addOwner(firstName: String, lastName: String, carbrand: String, model: String,purchaseyear: String, phno: String ) {
+          let newOwner = Details(_firstName: firstName, _lastName: lastName, _carbrand:carbrand, _model:model, _purchaseyear: purchaseyear, _phno: phno)
+          self.owners[phno] = newOwner
+      }
+
+      init() {
+          self.owners = {}
+      }
+
     }
-
-    pub fun addOwner(firstName: String, lastName: String, carbrand: String, model: String,purchaseyear: String, phno: String ) {
-        let newOwner = Details(_firstName: firstName, _lastName: lastName, _carbrand:carbrand, _model:model, _purchaseyear: purchaseyear, _phno: phno)
-        self.owners[phno] = newOwner
-    }
-
-    init() {
-        self.owners = {}
-    }
-
-}
 
 Now deploy the contract.
 
@@ -55,17 +55,17 @@ Step 2 :
 
 Now open a new transaction and type in the below code :
 
-  import CarOwner from 0x01
+    import CarOwner from 0x01
 
-transaction(firstName: String, lastName: String, carbrand: String, model : String, purchaseyear: String, phno:String) {
+    transaction(firstName: String, lastName: String, carbrand: String, model : String, purchaseyear: String, phno:String) {
 
-    prepare(signer: AuthAccount) {}
+      prepare(signer: AuthAccount) {}
 
-    execute {
-        CarOwner.addOwner(firstName: firstName, lastName: lastName, carbrand: carbrand , model: model ,  purchaseyear:purchaseyear ,phno:phno )
-        log("Owner Added !")
+      execute {
+          CarOwner.addOwner(firstName: firstName, lastName: lastName, carbrand: carbrand , model: model ,  purchaseyear:purchaseyear ,phno:phno )
+          log("Owner Added !")
+      }
     }
-}
 
 Now, Enter the required details and send the transaction.
 
@@ -73,11 +73,11 @@ Step 3 :
 
 Now, to view the details , open a new script and type in the below code :
 
-  import CarOwner from 0x01
+    import CarOwner from 0x01
 
-pub fun main(phno: String): CarOwner.Details {
-    return CarOwner.owners[phno]!
-}
+    pub fun main(phno: String): CarOwner.Details {
+      return CarOwner.owners[phno]!
+    }
 
 Now, enter the phone number and execute the code.
 
